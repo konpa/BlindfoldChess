@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/BlindfoldChess/static/js/app.04795b1f.chunk.js",
-    "app.js.map": "/BlindfoldChess/static/js/app.04795b1f.chunk.js.map",
+    "app.js": "/BlindfoldChess/static/js/app.86120533.chunk.js",
+    "app.js.map": "/BlindfoldChess/static/js/app.86120533.chunk.js.map",
     "runtime~app.js": "/BlindfoldChess/static/js/runtime~app.756646c0.js",
     "runtime~app.js.map": "/BlindfoldChess/static/js/runtime~app.756646c0.js.map",
-    "static/js/2.f7100384.chunk.js": "/BlindfoldChess/static/js/2.f7100384.chunk.js",
-    "static/js/2.f7100384.chunk.js.map": "/BlindfoldChess/static/js/2.f7100384.chunk.js.map",
+    "static/js/2.404bd218.chunk.js": "/BlindfoldChess/static/js/2.404bd218.chunk.js",
+    "static/js/2.404bd218.chunk.js.map": "/BlindfoldChess/static/js/2.404bd218.chunk.js.map",
     "fonts/AntDesign.ttf": "/BlindfoldChess/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/BlindfoldChess/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/BlindfoldChess/./fonts/Feather.ttf",
@@ -24,11 +24,11 @@
     "index.html": "/BlindfoldChess/index.html",
     "manifest.json": "/BlindfoldChess/manifest.json",
     "serve.json": "/BlindfoldChess/serve.json",
-    "static/js/2.f7100384.chunk.js.LICENSE.txt": "/BlindfoldChess/static/js/2.f7100384.chunk.js.LICENSE.txt"
+    "static/js/2.404bd218.chunk.js.LICENSE.txt": "/BlindfoldChess/static/js/2.404bd218.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime~app.756646c0.js",
-    "static/js/2.f7100384.chunk.js",
-    "static/js/app.04795b1f.chunk.js"
+    "static/js/2.404bd218.chunk.js",
+    "static/js/app.86120533.chunk.js"
   ]
 }
