@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Box, Button, Center, Stack, Alert, VStack, HStack, Text, IconButton, CloseIcon,
+  Box, Button, Center, Stack, Alert, VStack, HStack, Text, IconButton, CloseIcon, Heading, Link,
 } from 'native-base';
 
 import { AuthContext } from '../context/AuthProvider';
@@ -14,16 +14,27 @@ export default function LoginScreen() {
         alignItems="center"
         justifyContent="center"
         flex={1}
-        _dark={{ bg: 'coolGray.800' }}
+        p="5"
+        _dark={{ bg: 'light.800' }}
       >
+        <Heading size="lg" style={{ textTransform: 'uppercase' }} _dark={{ color: 'light.300' }}>Blindfold Chess</Heading>
+        <Text mb="16" _dark={{ color: 'light.300' }}>
+          Powered by
+          <Link href="lichess.org" ml="1">lichess.org</Link>
+        </Text>
         <Button
           onPress={() => login()}
           mt="2"
-          colorScheme="tertiary"
+          w="100%"
+          maxW="300"
           isLoading={isLoading}
+          colorScheme="amber"
         >
-          Sign in with Lichess.org
+          SIGN IN
         </Button>
+        <Text mt="2" fontSize="xs" _dark={{ color: 'light.300' }}>
+          Sign in with your lichess account
+        </Text>
       </Box>
       {error && (
         <Box

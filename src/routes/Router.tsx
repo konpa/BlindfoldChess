@@ -13,6 +13,7 @@ import HomeScreen from '../screens/HomeScreen';
 const Stack = createNativeStackNavigator();
 
 export default function Router() {
+  const appName = 'Blindfold Chess';
   const [isLoading, setIsLoading] = useState(true);
   const {
     user, setUser, setError,
@@ -56,15 +57,14 @@ export default function Router() {
         {user == null ? (
           // No token found, user isn't signed in
           <Stack.Screen
-            name="Sign In"
+            name={`Sign In - ${appName}`}
             component={LoginScreen}
             options={{ headerShown: false }}
           />
-
         ) : (
           // User is signed in
           <Stack.Screen
-            name="Home"
+            name={`Home - ${appName}`}
             component={HomeScreen}
             options={{ headerShown: false }}
           />
