@@ -1,4 +1,5 @@
 import { AccessContext, HttpClient, OAuth2AuthCodePKCE } from '@bity/oauth2-auth-code-pkce';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const lichessHost = 'https://lichess.org';
 export const clientId = 'blindfoldchess.dev';
@@ -32,18 +33,32 @@ export class LichessCtrl {
   }
 
   async init() {
-    try {
-      const hasAuthCode = await this.oauth.isReturningFromAuthServer();
-      if (hasAuthCode) {
-        this.accessContext = await this.oauth.getAccessToken();
-        this.token = this.accessContext?.token?.value;
+    const authDataSerialized = await AsyncStorage.getItem('@AuthData');
 
-        const fetch = this.oauth.decorateFetchHTTPClient(window.fetch);
-        await this.getUsername(fetch);
-      }
-    } catch (err) {
-      this.error = err;
+    if (authDataSerialized) {
+      return JSON.parse(authDataSerialized);
     }
+
+    const hasAuthCode = await this.oauth.isReturningFromAuthServer();
+
+    if (hasAuthCode) {
+      this.accessContext = await this.oauth.getAccessToken();
+      this.token = this.accessContext?.token?.value;
+
+      const fetch = this.oauth.decorateFetchHTTPClient(window.fetch);
+      await this.getUsername(fetch);
+
+      const user = {
+        token: this.token,
+        name: this.name,
+      };
+
+      await AsyncStorage.setItem('@AuthData', JSON.stringify(user));
+
+      return user;
+    }
+
+    return null;
   }
 
   async getUsername(fetch: HttpClient) {
@@ -52,9 +67,14 @@ export class LichessCtrl {
   }
 
   async logout() {
-    const token = this.accessContext?.token?.value;
-    this.accessContext = undefined;
-    this.error = undefined;
+    let user = null;
+    const authDataSerialized = await AsyncStorage.getItem('@AuthData');
+
+    if (authDataSerialized) {
+      user = JSON.parse(authDataSerialized);
+    }
+
+    const { token } = user;
 
     await fetch(`${lichessHost}/api/token`, {
       method: 'DELETE',
@@ -62,5 +82,11 @@ export class LichessCtrl {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    this.token = undefined;
+    this.accessContext = undefined;
+    this.error = undefined;
+
+    await AsyncStorage.removeItem('@AuthData');
   }
 }

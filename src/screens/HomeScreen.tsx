@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   StatusBar, Box, HStack, IconButton, Icon, Text,
 } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { AuthContext } from '../context/AuthProvider';
+
 export default function HomeScreen() {
+  const { logout } = useContext(AuthContext);
+
   return (
     <>
       <StatusBar />
@@ -24,7 +28,10 @@ export default function HomeScreen() {
           </Text>
         </HStack>
         <HStack>
-          <IconButton icon={<Icon as={MaterialIcons} name="search" size="sm" />} />
+          <IconButton
+            onPress={() => logout()}
+            icon={<Icon as={MaterialIcons} name="logout" size="sm" />}
+          />
         </HStack>
       </HStack>
     </>

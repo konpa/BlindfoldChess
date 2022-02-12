@@ -1,19 +1,54 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  Box, HStack, Spinner, Heading,
+} from 'native-base';
 
 import { AuthContext } from '../context/AuthProvider';
+import { LichessCtrl } from '../services/LichessCtrl';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function Router() {
-  const { user, setUser } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const {
+    user, setUser, setError,
+  } = useContext(AuthContext);
 
   useEffect(() => {
-    setUser({ name: 'alskaa' });
-  }, [setUser]);
+    setIsLoading(true);
+    new LichessCtrl().init()
+      .then((response) => {
+        setUser(response);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [setUser, setError, setIsLoading]);
+
+  if (isLoading) {
+    return (
+      <Box
+        alignItems="center"
+        justifyContent="center"
+        flex={1}
+        _dark={{ bg: 'coolGray.800' }}
+      >
+        <HStack space={2} justifyContent="center">
+          <Spinner accessibilityLabel="Loading" />
+          <Heading color="primary.500" fontSize="md">
+            Loading
+          </Heading>
+        </HStack>
+      </Box>
+    );
+  }
 
   return (
     <NavigationContainer>
