@@ -39,11 +39,11 @@ export default function Router() {
         alignItems="center"
         justifyContent="center"
         flex={1}
-        _dark={{ bg: 'coolGray.800' }}
+        _dark={{ bg: 'light.800' }}
       >
         <HStack space={2} justifyContent="center">
-          <Spinner accessibilityLabel="Loading" />
-          <Heading color="primary.500" fontSize="md">
+          <Spinner accessibilityLabel="Loading" color="amber.500" />
+          <Heading color="amber.500" fontSize="md">
             Loading
           </Heading>
         </HStack>

@@ -22,7 +22,7 @@ export default function HomeScreen() {
         _dark={{ bg: 'light.900' }}
       >
         <HStack>
-          <IconButton icon={<Icon size="sm" as={MaterialIcons} name="menu" _dark={{ color: 'light.300' }} />} />
+          <IconButton colorScheme="amber" icon={<Icon size="sm" as={MaterialIcons} name="menu" _dark={{ color: 'light.300' }} />} />
         </HStack>
         <HStack>
           <Text
@@ -38,6 +38,7 @@ export default function HomeScreen() {
           <IconButton
             onPress={() => logout()}
             icon={<Icon as={MaterialIcons} name="logout" size="sm" _dark={{ color: 'light.300' }} />}
+            colorScheme="amber"
           />
         </HStack>
       </HStack>
