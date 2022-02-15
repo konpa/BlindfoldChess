@@ -1,9 +1,16 @@
 import React from 'react';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Box, Center, Stack, Button,
 } from 'native-base';
 
-export default function HomeScreen({ navigation }) {
+type RootStackParamList = {
+  CreateGame: undefined;
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, 'CreateGame'>;
+
+export default function HomeScreen({ navigation }: Props) {
   return (
     <Box
       position="absolute"

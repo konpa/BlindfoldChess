@@ -2,7 +2,9 @@
   "expo": {
     "name": "BlindfoldChess",
     "slug": "BlindfoldChess",
-    "version": "1.0.0",
+    "scheme": "io.konpa.blindfoldchess",
+    "version": "0.0.1",
+    "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,9 +19,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "io.konpa.blindfoldchess",
+      "buildNumber": "0.0.1",
       "supportsTablet": true
     },
     "android": {
+      "package": "io.konpa.blindfoldchess",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
