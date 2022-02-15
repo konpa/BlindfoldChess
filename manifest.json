@@ -4,7 +4,7 @@
   "lang": "en",
   "name": "BlindfoldChess",
   "short_name": "BlindfoldChess",
-  "start_url": "/?utm_source=web_app_manifest",
+  "start_url": "https://konpa.github.io/BlindfoldChess/",
   "orientation": "portrait",
   "related_applications": [
     {
