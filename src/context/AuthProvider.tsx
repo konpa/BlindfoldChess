@@ -14,6 +14,7 @@ type AuthContextData = {
   user: any,
   setUser: any,
   isLoading: boolean,
+  setIsLoading: any,
   error: any,
   setError: any,
   login(): void,
@@ -110,6 +111,7 @@ export function AuthProvider({ children }:{ children:any }) {
     error,
     setError,
     isLoading,
+    setIsLoading,
     login: () => {
       setIsLoading(true);
       promptAsync({ useProxy });
