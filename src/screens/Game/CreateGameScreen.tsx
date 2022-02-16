@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import {
@@ -8,8 +8,9 @@ import {
 import { AuthContext } from '../../context/AuthProvider';
 
 export default function CreateGameScreen() {
-  const { user, setError, setIsLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [level, setLevel] = React.useState('1');
   const [color, setColor] = React.useState('random');
 
@@ -32,12 +33,6 @@ export default function CreateGameScreen() {
       data: qs.stringify(data),
     })
       .then(() => {
-        //
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
         setIsLoading(false);
       });
   };
@@ -108,6 +103,7 @@ export default function CreateGameScreen() {
             mt="2"
             colorScheme="amber"
             onPress={() => challengeAI()}
+            isLoading={isLoading}
           >
             Play
           </Button>

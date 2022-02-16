@@ -93,17 +93,19 @@ export function AuthProvider({ children }:{ children:any }) {
       }
     }
 
-    AsyncStorage.getItem('@AuthData')
-      .then((authData) => {
-        if (authData) {
-          setUser(JSON.parse(authData));
-        } else {
-          readResponse();
-        }
-      });
+    if (user === null) {
+      AsyncStorage.getItem('@AuthData')
+        .then((authData) => {
+          if (authData) {
+            setUser(JSON.parse(authData));
+          } else {
+            readResponse();
+          }
+        });
+    }
 
     setIsLoading(false);
-  }, [response, request]);
+  }, [user, response, request]);
 
   const AuthContextValue = useMemo(() => ({
     user,
