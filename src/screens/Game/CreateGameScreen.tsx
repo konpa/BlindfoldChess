@@ -42,7 +42,7 @@ export default function CreateGameScreen() {
       <Box safeArea p="2" py="8" w="90%" maxW="290">
         <VStack space={3} mt="5">
           <FormControl>
-            <FormControl.Label>Variant</FormControl.Label>
+            <FormControl.Label>VARIANT</FormControl.Label>
             <Select
               selectedValue="standard"
               isDisabled
@@ -51,7 +51,7 @@ export default function CreateGameScreen() {
             </Select>
           </FormControl>
           <FormControl mt="2">
-            <FormControl.Label>Time Control</FormControl.Label>
+            <FormControl.Label>TIME CONTROL</FormControl.Label>
             <Select
               selectedValue="correspondence"
               isDisabled
@@ -60,7 +60,7 @@ export default function CreateGameScreen() {
             </Select>
           </FormControl>
           <FormControl mt="2">
-            <FormControl.Label>Color</FormControl.Label>
+            <FormControl.Label>COLOR</FormControl.Label>
             <Select
               selectedValue={color}
               onValueChange={(newColor) => setColor(newColor)}
@@ -72,8 +72,8 @@ export default function CreateGameScreen() {
           </FormControl>
           <FormControl mt="2">
             <FormControl.Label>
-              Stockfish level
-              <Badge ml="2">Elo</Badge>
+              STOCKFISH LEVEL
+              <Badge ml="2">ELO</Badge>
             </FormControl.Label>
             <Radio.Group
               value={level}
@@ -101,11 +101,13 @@ export default function CreateGameScreen() {
           </FormControl>
           <Button
             mt="2"
+            py="3"
+            shadow="2"
             colorScheme="amber"
             onPress={() => challengeAI()}
             isLoading={isLoading}
           >
-            Play
+            PLAY
           </Button>
         </VStack>
       </Box>

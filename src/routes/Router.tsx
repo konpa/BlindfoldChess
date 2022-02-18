@@ -8,17 +8,11 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { AuthContext } from '../context/AuthProvider';
+import { RootStackParamList } from '../types/RouteTypes';
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CreateGameScreen from '../screens/Game/CreateGameScreen';
 import PlayGameScreen from '../screens/Game/PlayGameScreen';
-
-type RootStackParamList = {
-  SignIn: undefined;
-  Home: undefined;
-  CreateGame: undefined;
-  PlayGame: { gameId: string };
-};
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 

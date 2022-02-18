@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useContext, useEffect, useState,
+  useCallback, useContext, useEffect, useRef, useState,
 } from 'react';
 import axios from 'axios';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -10,15 +10,13 @@ import {
 } from 'native-base';
 
 import { AuthContext } from '../context/AuthProvider';
+import { RootStackParamList } from '../types/RouteTypes';
 
-type RootStackParamList = {
-  CreateGame: undefined;
-  PlayGame: { gameId: string };
-};
-
-type Props = NativeStackScreenProps<RootStackParamList, 'CreateGame'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
+  const mountedRef = useRef(false);
+
   const { user } = useContext(AuthContext);
 
   const [games, setGames] = useState(null);
@@ -34,15 +32,23 @@ export default function HomeScreen({ navigation }: Props) {
       },
     })
       .then((response) => {
-        setGames(response.data.nowPlaying);
-        setLoading(false);
+        if (mountedRef.current) {
+          setGames(response.data.nowPlaying);
+          setLoading(false);
+        }
       });
   }, [user?.token.accessToken]);
 
   useEffect(() => {
+    mountedRef.current = true;
+
     if (games === null) {
       getMyOngoingGames();
     }
+
+    return () => {
+      mountedRef.current = false;
+    };
   }, [games, getMyOngoingGames]);
 
   const gameItem = ({ item }: { item: any }) => (
@@ -52,7 +58,15 @@ export default function HomeScreen({ navigation }: Props) {
         gameId: item.gameId,
       })}
     >
-      <Box pl="4" pr="5" py="5" _dark={{ bg: 'light.700' }}>
+      <Box
+        rounded="lg"
+        pl="4"
+        pr="5"
+        py="5"
+        mb="2"
+        shadow="2"
+        _dark={{ bg: 'light.900' }}
+      >
         <HStack space={3} justifyContent="space-between">
           <Avatar bg={item.color} size="48px" />
           <VStack>
@@ -84,10 +98,11 @@ export default function HomeScreen({ navigation }: Props) {
             onRefresh={getMyOngoingGames}
           />
         )}
+        p="2"
       />
       <Box
         position="absolute"
-        bottom="0"
+        bottom="5"
         left="0"
         right="0"
         py="3"
@@ -98,6 +113,8 @@ export default function HomeScreen({ navigation }: Props) {
               onPress={() => navigation.navigate('CreateGame')}
               colorScheme="amber"
               isLoading={loading}
+              py="3"
+              shadow="2"
             >
               NEW GAME
             </Button>

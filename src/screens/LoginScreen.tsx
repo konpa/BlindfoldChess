@@ -19,7 +19,8 @@ export default function LoginScreen() {
       <Heading size="lg" style={{ textTransform: 'uppercase' }} _dark={{ color: 'light.300' }}>Blindfold Chess</Heading>
       <Text mb="16" _dark={{ color: 'light.300' }}>
         Powered by
-        <Link href="lichess.org" ml="1">lichess.org</Link>
+        { ' ' }
+        <Link href="lichess.org">lichess.org</Link>
       </Text>
       <Button
         onPress={() => login()}
