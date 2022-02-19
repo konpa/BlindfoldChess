@@ -20,7 +20,7 @@ export default function LoginScreen() {
       <Text mb="16" _dark={{ color: 'light.300' }}>
         Powered by
         { ' ' }
-        <Link href="lichess.org">lichess.org</Link>
+        <Link href="lichess.org" _dark={{ color: 'white' }}>lichess.org</Link>
       </Text>
       <Button
         onPress={() => login()}

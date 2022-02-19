@@ -169,10 +169,29 @@ export default function PlayGameScreen({ route }: Props) {
                     <Text bold color="light.400">{ `${line?.number}.` }</Text>
                   </Box>
                   <Box minW="20">
-                    <Text bold>
+                    <Text
+                      bold
+                      _light={{
+                        color: line?.lastMove === 'white' ? 'amber.500' : 'black',
+                      }}
+                      _dark={{
+                        color: line?.lastMove === 'white' ? 'amber.500' : 'white',
+                      }}
+                    >
                       {line?.whitePiece ? (
                         <>
-                          <Icon as={FontAwesome5} name={`chess-${line?.whitePiece}`} size="4" mr="1" />
+                          <Icon
+                            as={FontAwesome5}
+                            name={`chess-${line?.whitePiece}`}
+                            size="4"
+                            pr="1"
+                            _light={{
+                              color: line?.lastMove === 'white' ? 'amber.500' : 'black',
+                            }}
+                            _dark={{
+                              color: line?.lastMove === 'white' ? 'amber.500' : 'white',
+                            }}
+                          />
                           <Text>{ line?.whiteMove.substring(1) }</Text>
                         </>
                       ) : (
@@ -181,10 +200,29 @@ export default function PlayGameScreen({ route }: Props) {
                     </Text>
                   </Box>
                   <Box minW="20">
-                    <Text bold>
+                    <Text
+                      bold
+                      _light={{
+                        color: line?.lastMove === 'black' ? 'amber.500' : 'black',
+                      }}
+                      _dark={{
+                        color: line?.lastMove === 'black' ? 'amber.500' : 'white',
+                      }}
+                    >
                       {line?.blackPiece ? (
                         <>
-                          <Icon as={FontAwesome5} name={`chess-${line?.blackPiece}`} size="4" mr="1" />
+                          <Icon
+                            as={FontAwesome5}
+                            name={`chess-${line?.blackPiece}`}
+                            size="4"
+                            pr="1"
+                            _light={{
+                              color: line?.lastMove === 'black' ? 'amber.500' : 'black',
+                            }}
+                            _dark={{
+                              color: line?.lastMove === 'black' ? 'amber.500' : 'white',
+                            }}
+                          />
                           <Text>{ line?.blackMove.substring(1) }</Text>
                         </>
                       ) : (
