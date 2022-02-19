@@ -102,7 +102,6 @@ export default function CreateGameScreen() {
           <Button
             mt="2"
             py="3"
-            shadow="2"
             colorScheme="amber"
             onPress={() => challengeAI()}
             isLoading={isLoading}

@@ -6,8 +6,9 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RefreshControl } from 'react-native';
 import {
   Box, Center, Stack, Button, HStack, VStack, Spacer, Avatar, FlatList, Text,
-  Pressable,
+  Pressable, Icon,
 } from 'native-base';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { AuthContext } from '../context/AuthProvider';
 import { RootStackParamList } from '../types/RouteTypes';
@@ -63,9 +64,9 @@ export default function HomeScreen({ navigation }: Props) {
         pl="4"
         pr="5"
         py="5"
-        mb="2"
-        shadow="2"
-        _dark={{ bg: 'light.900' }}
+        mb="4"
+        _dark={{ bg: 'light.700' }}
+        _light={{ bg: 'light.200' }}
       >
         <HStack space={3} justifyContent="space-between">
           <Avatar bg={item.color} size="48px" />
@@ -78,8 +79,10 @@ export default function HomeScreen({ navigation }: Props) {
             </Text>
           </VStack>
           <Spacer />
-          <Text fontSize="xs" alignSelf="flex-start">
-            {item.gameId}
+          <Text>
+            {item.isMyTurn && (
+              <Icon as={MaterialIcons} name="timer" color="amber.500" />
+            )}
           </Text>
         </HStack>
       </Box>
@@ -114,7 +117,6 @@ export default function HomeScreen({ navigation }: Props) {
               colorScheme="amber"
               isLoading={loading}
               py="3"
-              shadow="2"
             >
               NEW GAME
             </Button>

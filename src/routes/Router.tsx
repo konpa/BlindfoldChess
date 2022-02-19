@@ -67,7 +67,7 @@ export default function Router() {
             name="SignIn"
             component={LoginScreen}
             options={{
-              title: 'Log In - Blindfold Chess',
+              title: 'Log In - Blindfold Lichess',
               headerShown: false,
             }}
           />
@@ -87,7 +87,7 @@ export default function Router() {
             name="Home"
             component={HomeScreen}
             options={{
-              title: 'Blindfold Chess',
+              title: 'Blindfold Lichess',
             }}
           />
           <RootStack.Screen

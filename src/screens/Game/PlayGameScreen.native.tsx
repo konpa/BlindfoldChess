@@ -19,82 +19,15 @@ import { Chess } from 'chess.js';
 
 import { AuthContext } from '../../context/AuthProvider';
 import { RootStackParamList } from '../../types/RouteTypes';
+import {
+  readStream, orderMoves, GameLine, GameLines,
+} from '../../helpers/GameHelpers';
 
 polyfillEncoding();
 polyfillReadableStream();
 polyfillFetch();
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PlayGame'>;
-
-const readStream = (processLine: any) => (response: any) => {
-  const stream = response.body.getReader();
-  const matcher = /\r?\n/;
-  const decoder = new TextDecoder();
-  let buf = '';
-
-  const loop = () => {
-    stream.read().then(({ done, value }: any) => {
-      if (done) {
-        if (buf.length > 0) processLine(JSON.parse(buf));
-      } else {
-        const chunk = decoder.decode(value, {
-          stream: true,
-        });
-        buf += chunk;
-
-        const parts = buf.split(matcher);
-        buf = parts.pop() ?? '';
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const i of parts.filter((p) => p)) processLine(JSON.parse(i));
-
-        return loop();
-      }
-
-      return true;
-    });
-  };
-
-  return loop();
-};
-
-type GameLine = {
-  number: number,
-  whiteMove: string,
-  blackMove: string,
-};
-
-type GameLines = Array<GameLine>;
-
-const orderMoves = (array: Array<string>): GameLines => {
-  let lineNumber = 1;
-
-  let orderedMoves = Array.from(array, (value, index) => {
-    const line = {
-      number: 0,
-      whiteMove: '',
-      blackMove: '',
-    };
-
-    if (index % 2 === 0 || index === 0) {
-      line.number = lineNumber;
-      line.whiteMove = array[index];
-      if (array[index + 1] !== undefined) {
-        line.blackMove = array[index + 1];
-      }
-
-      lineNumber += 1;
-
-      return line;
-    }
-
-    return null;
-  });
-
-  orderedMoves = orderedMoves.filter((n) => n);
-
-  return orderedMoves.reverse();
-};
 
 export default function PlayGameScreen({ route }: Props) {
   const mountedRef = useRef(false);
@@ -197,9 +130,8 @@ export default function PlayGameScreen({ route }: Props) {
         mt="4"
         rounded="8"
         w="300"
-        _dark={{
-          bg: turn === 'w' ? 'amber.600' : 'light.700',
-        }}
+        _dark={{ bg: 'light.700' }}
+        _light={{ bg: 'light.200' }}
       >
         <HStack alignItems="center" space={3}>
           <Avatar size="24px" bg="white" />
@@ -214,7 +146,7 @@ export default function PlayGameScreen({ route }: Props) {
           <Spacer />
           <Text>
             {turn === 'w' && (
-              <Icon as={MaterialIcons} name="timer" />
+              <Icon as={MaterialIcons} name="timer" color="amber.500" />
             )}
           </Text>
         </HStack>
@@ -227,19 +159,20 @@ export default function PlayGameScreen({ route }: Props) {
                 <HStack
                   key={index.toString()}
                   _dark={{ bg: 'light.700' }}
+                  _light={{ bg: 'light.200' }}
                   px="6"
                   py="2"
                   rounded="4"
                   alignItems="center"
                 >
                   <Box minW="12">
-                    <Text bold color="light.400">{ `${line.number}.` }</Text>
+                    <Text bold color="light.400">{ `${line?.number}.` }</Text>
                   </Box>
                   <Box minW="20">
-                    <Text bold>{ line.whiteMove }</Text>
+                    <Text bold>{ line?.whiteMove }</Text>
                   </Box>
                   <Box>
-                    <Text bold>{ line.blackMove }</Text>
+                    <Text bold>{ line?.blackMove }</Text>
                   </Box>
                 </HStack>
               ))}
@@ -253,9 +186,8 @@ export default function PlayGameScreen({ route }: Props) {
         py="2"
         rounded="8"
         w="300"
-        _dark={{
-          bg: turn === 'b' ? 'amber.600' : 'light.700',
-        }}
+        _dark={{ bg: 'light.700' }}
+        _light={{ bg: 'light.200' }}
       >
         <HStack alignItems="center" space={3}>
           <Avatar size="24px" bg="black" />
@@ -270,7 +202,7 @@ export default function PlayGameScreen({ route }: Props) {
           <Spacer />
           <Text>
             {turn === 'b' && (
-              <Icon as={MaterialIcons} name="timer" />
+              <Icon as={MaterialIcons} name="timer" color="amber.500" />
             )}
           </Text>
         </HStack>
