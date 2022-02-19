@@ -1,7 +1,31 @@
+const findFigure = (str: string): string => {
+  const figuresMapping = {
+    K: 'king',
+    Q: 'queen',
+    R: 'rook',
+    B: 'bishop',
+    N: 'knight',
+  };
+
+  let figure = '';
+
+  Object.entries(figuresMapping).forEach((entry) => {
+    const [key, value] = entry;
+    if (str.includes(key)) {
+      figure = value;
+    }
+  });
+
+  return figure;
+};
+
 export type GameLine = {
   number: number,
   whiteMove: string,
+  whitePiece: string,
   blackMove: string,
+  blackPiece: string,
+  lastMove: string,
 } | null;
 
 export type GameLines = Array<GameLine>;
@@ -38,21 +62,37 @@ export const readStream = (processLine: any) => (response: any) => {
   return loop();
 };
 
-export const orderMoves = (array: Array<string>): GameLines => {
+export const orderMoves = (history: Array<string>): GameLines => {
   let lineNumber = 1;
 
-  let orderedMoves = Array.from(array, (value, index) => {
+  let orderedMoves = Array.from(history, (value, index) => {
     const line = {
       number: 0,
       whiteMove: '',
+      whitePiece: '',
       blackMove: '',
+      blackPiece: '',
+      lastMove: '',
     };
 
     if (index % 2 === 0 || index === 0) {
+      if (history.length === (index + 1)) {
+        line.lastMove = 'white';
+      }
+      if (
+        history[index + 1] !== undefined
+        && history.length === (index + 2)
+      ) {
+        line.lastMove = 'black';
+      }
+
       line.number = lineNumber;
-      line.whiteMove = array[index];
-      if (array[index + 1] !== undefined) {
-        line.blackMove = array[index + 1];
+      line.whiteMove = history[index];
+      line.whitePiece = findFigure(line.whiteMove);
+
+      if (history[index + 1] !== undefined) {
+        line.blackMove = history[index + 1];
+        line.blackPiece = findFigure(line.blackMove);
       }
 
       lineNumber += 1;

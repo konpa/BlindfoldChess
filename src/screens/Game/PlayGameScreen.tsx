@@ -6,7 +6,7 @@ import {
   Center, Box, VStack, HStack, ScrollView, Text, Avatar, Spacer, Icon,
 } from 'native-base';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 import Chess from 'chess.js';
 
@@ -157,10 +157,28 @@ export default function PlayGameScreen({ route }: Props) {
                     <Text bold color="light.400">{ `${line?.number}.` }</Text>
                   </Box>
                   <Box minW="20">
-                    <Text bold>{ line?.whiteMove }</Text>
+                    <Text bold>
+                      {line?.whitePiece ? (
+                        <>
+                          <Icon as={FontAwesome5} name={`chess-${line?.whitePiece}`} size="4" mr="1" />
+                          <Text>{ line?.whiteMove.substring(1) }</Text>
+                        </>
+                      ) : (
+                        <Text>{ line?.whiteMove }</Text>
+                      )}
+                    </Text>
                   </Box>
-                  <Box>
-                    <Text bold>{ line?.blackMove }</Text>
+                  <Box minW="20">
+                    <Text bold>
+                      {line?.blackPiece ? (
+                        <>
+                          <Icon as={FontAwesome5} name={`chess-${line?.blackPiece}`} size="4" mr="1" />
+                          <Text>{ line?.blackMove.substring(1) }</Text>
+                        </>
+                      ) : (
+                        <Text>{ line?.blackMove }</Text>
+                      )}
+                    </Text>
                   </Box>
                 </HStack>
               ))}

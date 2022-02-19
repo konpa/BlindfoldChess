@@ -63,19 +63,16 @@ export default function HomeScreen({ navigation }: Props) {
         rounded="lg"
         pl="4"
         pr="5"
-        py="5"
+        py="4"
         mb="4"
         _dark={{ bg: 'light.700' }}
         _light={{ bg: 'light.200' }}
       >
-        <HStack space={3} justifyContent="space-between">
-          <Avatar bg={item.color} size="48px" />
+        <HStack space={3} alignItems="center">
+          <Avatar bg={item.color} size="35px" />
           <VStack>
             <Text bold>
               {item.opponent.username}
-            </Text>
-            <Text>
-              {item.lastMove}
             </Text>
           </VStack>
           <Spacer />
