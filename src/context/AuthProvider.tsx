@@ -35,7 +35,7 @@ const redirectUri = Platform.select({
 WebBrowser.maybeCompleteAuthSession();
 
 const host = 'https://lichess.org';
-const clientId = 'io.blindfoldchess';
+const clientId = 'io.konpa.blindfoldlichess';
 
 const discovery = {
   authorizationEndpoint: `${host}/oauth`,

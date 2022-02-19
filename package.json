@@ -1,8 +1,8 @@
 {
-  "name": "blindfoldchess",
+  "name": "blindfoldlichess",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
-  "homepage": "https://konpa.github.io/BlindfoldChess",
+  "homepage": "https://konpa.github.io/BlindfoldLichess",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

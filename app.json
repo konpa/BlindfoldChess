@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "BlindfoldChess",
-    "slug": "BlindfoldChess",
-    "scheme": "io.konpa.blindfoldchess",
+    "name": "BlindfoldLichess",
+    "slug": "BlindfoldLichess",
+    "scheme": "io.konpa.blindfoldlichess",
     "version": "0.0.1",
     "privacy": "unlisted",
     "orientation": "portrait",
@@ -20,12 +20,12 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "io.konpa.blindfoldchess",
+      "bundleIdentifier": "io.konpa.blindfoldlichess",
       "buildNumber": "0.0.1",
       "supportsTablet": true
     },
     "android": {
-      "package": "io.konpa.blindfoldchess",
+      "package": "io.konpa.blindfoldlichess",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -34,7 +34,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "startUrl": "https://konpa.github.io/BlindfoldChess/"
+      "startUrl": "https://konpa.github.io/BlindfoldLichess/"
     }
   }
 }
